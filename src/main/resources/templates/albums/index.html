@@ -27,6 +27,8 @@
                         <th scope="col">Length</th>
                         <th scope="col">Release Date</th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,12 +37,43 @@
                         <td th:text="*{bandOrArtist}"></td>
                         <td th:text="*{length}"></td>
                         <td th:text="*{releaseDate}"></td>
-                        <td class="text-nowrap" style="width: 1%;"><a th:href="@{'/albums/'+*{id}}"><button
+                        <td>
+                            <a th:href="@{'/albums/'+*{id}}"><button
                                     class="btn btn-sm bg-primary-subtle rounded-3">View</button></a>
+                        </td>
+                        <td>
                             <a th:href="@{'/albums/update/' + *{id}}"><button
                                     class="btn btn-sm bg-warning-subtle rounded-3">Modify</button></a>
-                            <a th:href="@{'/albums/'+*{id}}"><button
-                                    class="btn btn-sm bg-danger-subtle rounded-3">Delete</button></a>
+                        </td>
+                        <td>
+                            <!-- Modal trigger -->
+                            <button type="button" class="btn bg-danger-subtle rounded-3 btn-sm" data-bs-toggle="modal"
+                                th:data-bs-target="'#modal' + *{id}">
+                                Delete
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" th:id="'modal' + *{id}" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">Delete album and children songs?</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>You are about to delete album: [[*{title}]]</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-sm bg-primary-subtle rounded-3"
+                                                data-bs-dismiss="modal">Back</button>
+                                            <form th:action="'/albums/delete/' + *{id}" method="POST">
+                                                <button type="submit"
+                                                    class="btn bg-danger-subtle rounded-3 btn-sm">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
