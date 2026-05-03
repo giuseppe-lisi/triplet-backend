@@ -1,7 +1,6 @@
 package com.mysongs.backend.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,10 +18,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -35,7 +31,7 @@ public class Album {
     private Integer id;
 
     @NotBlank(message = "Please insert a title")
-    @Size(min = 3)
+    @Size(min = 3, message = "Title must be at least 3 characters long")
     private String title;
 
     @NotBlank(message = "Please insert a band or artist")
@@ -47,7 +43,8 @@ public class Album {
     private String length;
 
     @NotNull(message = "Please enter a date")
-    private Date releaseDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate releaseDate;
 
     @OneToMany(mappedBy = "album")
     @JsonManagedReference
@@ -90,10 +87,10 @@ public class Album {
       this.bandOrArtist = value;
     }
 
-    public Date getReleaseDate() {
+    public LocalDate getReleaseDate() {
       return this.releaseDate;
     }
-    public void setReleaseDate(Date value) {
+    public void setReleaseDate(LocalDate value) {
       this.releaseDate = value;
     }
 
