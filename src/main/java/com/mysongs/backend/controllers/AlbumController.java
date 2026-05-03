@@ -105,4 +105,12 @@ public class AlbumController {
         
         return "redirect:/albums/" + album.getId();
     }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+        albumService.delete(id);
+        
+        return "redirect:/albums";
+    }
+    
 }

@@ -27,4 +27,8 @@ public class AlbumsService {
         albumsRepo.save(album);
     }
 
+    public void delete(Integer id) {
+        albumsRepo.deleteById(id);
+    }
+
 }
