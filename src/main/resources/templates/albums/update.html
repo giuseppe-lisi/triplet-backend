@@ -16,10 +16,17 @@
         <div class="container bg-white rounded-3 p-3 mb-5" th:if="${album != null}">
             <h3 class="fw-light">Create a new Album</h3>
             <form th:action="@{/albums/update}" method="POST">
-                <!-- hidden fields -->
+                <!-- Hidden inputs for related objects -->
+                <!-- id -->
                 <input type="hidden" th:field="*{id}">
-                <input type="hidden" th:field="*{songs}">
-                <input type="hidden" th:field="*{genres}">
+                <!-- Album Songs -->
+                <div hidden>
+                    <li th:each="song : ${album.songs}" th:field="${song.id}"></li>
+                </div>
+                <!-- Album genres -->
+                <div hidden>
+                    <li th:each="genre : ${album.genres}" th:field="${genre.id}"></li>
+                </div>
 
                 <label for="title" class="form-label mt-3">Title</label>
                 <input type="text" th:field="*{title}" id="title" class="form-control" th:errorClass="is-invalid">
