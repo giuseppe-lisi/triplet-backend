@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="~{ fragments/imports :: head }"></div>
+    <title>Albums List</title>
+</head>
+
+<body class="bg-body-secondary" style="margin-top: 120px;">
+    <header>
+        <div th:replace="~{ fragments/navbar :: navbar }"></div>
+        <div th:replace="~{ fragments/offcanvas :: offcanvas }"></div>
+    </header>
+
+    <main>
+        <div class="container bg-white mt-5 mb-5 pt-3 rounded-3">
+            <div class="d-flex justify-content-between">
+                <h3 class="fw-light">Albums List</h3>
+                <a th:href="@{albums/create}"><button class="btn btn-sm bg-primary-subtle">Create new Album</button></a>
+            </div>
+            <hr>
+            <table class="table table-hover row-gap-3">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Artist</th>
+                        <th scope="col">Length</th>
+                        <th scope="col">Release Date</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr scope="row" th:each="album : ${albums}" th:object="${album}">
+                        <td th:text="*{title}"></td>
+                        <td th:text="*{bandOrArtist}"></td>
+                        <td th:text="*{length}"></td>
+                        <td th:text="*{releaseDate}"></td>
+                        <td class="text-nowrap" style="width: 1%;"><a th:href="@{'/albums/'+*{id}}"><button
+                                    class="btn btn-sm bg-primary-subtle rounded-3">View</button></a>
+                            <a th:href="@{'/albums/update/' + *{id}}"><button
+                                    class="btn btn-sm bg-warning-subtle rounded-3">Modify</button></a>
+                            <a th:href="@{'/albums/'+*{id}}"><button
+                                    class="btn btn-sm bg-danger-subtle rounded-3">Delete</button></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+    <!-- Bootstrap js -->
+    <div th:replace="~{ fragments/imports :: bsScript }"></div>
+</body>
+
+</html>
