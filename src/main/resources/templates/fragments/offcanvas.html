@@ -6,7 +6,21 @@
         </div>
         <div class="offcanvas-body">
             <div class="d-flex flex-column justify-content-between h-100">
-                    <p>site wide search goes here</p>
+                <div>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a th:href="@{/}" class="link-underline-opacity-0 link-underline text-white">Home</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/albums}" class="link-underline-opacity-0 link-underline text-white">Album
+                                list</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/songs}" class="link-underline-opacity-0 link-underline text-white">Song
+                                list</a>
+                        </li>
+                    </ul>
+                </div>
                 <div class="mb-5">
                     <hr>
                     <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
@@ -14,4 +28,3 @@
             </div>
         </div>
     </div>
-</div>
