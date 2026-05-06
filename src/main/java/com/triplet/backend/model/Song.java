@@ -1,6 +1,7 @@
 package com.triplet.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,7 +23,7 @@ public class Song {
 
     @ManyToOne
     @JoinColumn(name = "album_id")
-    @JsonBackReference
+    @JsonIgnoreProperties({"songs", "img", "length", "releaseDate", "genres", "description", "id"})
     private Album album;
 
     @NotBlank(message = "Please enter a title")
